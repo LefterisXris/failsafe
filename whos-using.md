@@ -32,6 +32,7 @@ Many projects, organizations, and governments use Failsafe. If you're a happy us
 * [Presto](https://prestosql.io/)
 * [Redhat Zanata](http://zanata.org/)
 * [Testify](http://testifyproject.org)
+* [Trino](https://trino.io/)
 * [Wasabi](https://github.com/intuit/wasabi)
 
 ## Companies / Organizations
@@ -98,6 +99,7 @@ Many projects, organizations, and governments use Failsafe. If you're a happy us
 * [Steamroot](https://streamroot.io)
 * [StubbornJava](https://www.stubbornjava.com/)
 * [Telstra](https://www.telstra.com.au/)
+* [TIBCO](https://www.tibco.com/)
 * [Tink](https://www.tink.com/)
 * [TouchTunes](http://touchtunes.com/)
 * [Treasure Data](https://www.treasuredata.com/)
