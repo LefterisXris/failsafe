@@ -89,19 +89,7 @@ public class CircuitBreaker<R> extends DelayablePolicy<CircuitBreaker<R>, R> {
     state.set(new ClosedState(this, internals));
   }
 
-  /**
-   * The state of the circuit.
-   */
-  public enum State {
-    /** The circuit is closed and fully functional, allowing executions to occur. */
-    CLOSED,
-    /** The circuit is opened and not allowing executions to occur. */
-    OPEN,
-    /** The circuit is temporarily allowing executions to occur. */
-    HALF_OPEN
-  }
-
-  /**
+   /**
    * Returns whether the circuit allows execution and triggers a state transition if a threshold has been exceeded.
    */
   public boolean allowsExecution() {

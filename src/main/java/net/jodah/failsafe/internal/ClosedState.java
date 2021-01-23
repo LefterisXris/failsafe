@@ -16,7 +16,7 @@
 package net.jodah.failsafe.internal;
 
 import net.jodah.failsafe.CircuitBreaker;
-import net.jodah.failsafe.CircuitBreaker.State;
+import net.jodah.failsafe.State;
 import net.jodah.failsafe.ExecutionContext;
 
 public class ClosedState extends CircuitState {
