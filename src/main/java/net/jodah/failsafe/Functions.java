@@ -30,6 +30,8 @@ import java.util.function.Supplier;
  */
 final class Functions {
   private static final CompletableFuture<ExecutionResult> NULL_FUTURE = CompletableFuture.completedFuture(null);
+  private static final String SUPPLIER_STR = "supplier";
+  private static final String RUNNABLE_STR = "runnable";
 
   interface SettableSupplier<T> extends Supplier<T> {
     void set(T value);
@@ -73,7 +75,7 @@ final class Functions {
    */
   static <T> Supplier<CompletableFuture<ExecutionResult>> getPromise(ContextualSupplier<T> supplier,
     AbstractExecution execution) {
-    Assert.notNull(supplier, "supplier");
+    Assert.notNull(supplier, SUPPLIER_STR);
     return () -> {
       ExecutionResult result;
       try {
@@ -125,7 +127,7 @@ final class Functions {
    */
   static <T> Supplier<CompletableFuture<ExecutionResult>> getPromiseExecution(AsyncSupplier<T> supplier,
     AsyncExecution execution) {
-    Assert.notNull(supplier, "supplier");
+    Assert.notNull(supplier, SUPPLIER_STR);
     return new Supplier<CompletableFuture<ExecutionResult>>() {
       @Override
       public synchronized CompletableFuture<ExecutionResult> get() {
@@ -146,7 +148,7 @@ final class Functions {
    */
   static <T> Supplier<CompletableFuture<ExecutionResult>> getPromiseOfStage(
     ContextualSupplier<? extends CompletionStage<? extends T>> supplier, AbstractExecution execution) {
-    Assert.notNull(supplier, "supplier");
+    Assert.notNull(supplier, SUPPLIER_STR);
     return () -> {
       CompletableFuture<ExecutionResult> promise = new CompletableFuture<>();
       try {
@@ -174,7 +176,7 @@ final class Functions {
    */
   static <T> Supplier<CompletableFuture<ExecutionResult>> getPromiseOfStageExecution(
     AsyncSupplier<? extends CompletionStage<? extends T>> supplier, AsyncExecution execution) {
-    Assert.notNull(supplier, "supplier");
+    Assert.notNull(supplier, SUPPLIER_STR);
     Semaphore asyncFutureLock = new Semaphore(1);
     return () -> {
       try {
@@ -202,7 +204,7 @@ final class Functions {
   }
 
   static <T> AsyncSupplier<T> toAsyncSupplier(AsyncRunnable runnable) {
-    Assert.notNull(runnable, "runnable");
+    Assert.notNull(runnable, RUNNABLE_STR);
     return execution -> {
       runnable.run(execution);
       return null;
@@ -235,7 +237,7 @@ final class Functions {
   }
 
   static <T> CheckedSupplier<T> toSupplier(CheckedRunnable runnable) {
-    Assert.notNull(runnable, "runnable");
+    Assert.notNull(runnable, RUNNABLE_STR);
     return () -> {
       runnable.run();
       return null;
@@ -243,7 +245,7 @@ final class Functions {
   }
 
   static <T> CheckedSupplier<T> toSupplier(ContextualRunnable runnable, ExecutionContext context) {
-    Assert.notNull(runnable, "runnable");
+    Assert.notNull(runnable, RUNNABLE_STR);
     return () -> {
       runnable.run(context);
       return null;
@@ -251,12 +253,12 @@ final class Functions {
   }
 
   static <T> CheckedSupplier<T> toSupplier(ContextualSupplier<T> supplier, ExecutionContext context) {
-    Assert.notNull(supplier, "supplier");
+    Assert.notNull(supplier, SUPPLIER_STR);
     return () -> supplier.get(context);
   }
 
   static <T> ContextualSupplier<T> toCtxSupplier(CheckedRunnable runnable) {
-    Assert.notNull(runnable, "runnable");
+    Assert.notNull(runnable, RUNNABLE_STR);
     return ctx -> {
       runnable.run();
       return null;
@@ -264,7 +266,7 @@ final class Functions {
   }
 
   static <T> ContextualSupplier<T> toCtxSupplier(ContextualRunnable runnable) {
-    Assert.notNull(runnable, "runnable");
+    Assert.notNull(runnable, RUNNABLE_STR);
     return ctx -> {
       runnable.run(ctx);
       return null;
@@ -272,7 +274,7 @@ final class Functions {
   }
 
   static <T> ContextualSupplier<T> toCtxSupplier(CheckedSupplier<T> supplier) {
-    Assert.notNull(supplier, "supplier");
+    Assert.notNull(supplier, SUPPLIER_STR);
     return ctx -> supplier.get();
   }
 

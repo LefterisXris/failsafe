@@ -47,6 +47,7 @@ import java.util.function.Predicate;
 @SuppressWarnings("WeakerAccess")
 public class RetryPolicy<R> extends DelayablePolicy<RetryPolicy<R>, R> {
   private static final int DEFAULT_MAX_RETRIES = 2;
+  private static final String LISTENER_STR = "listener";
 
   // Policy config
   private Duration delay;
@@ -224,7 +225,7 @@ public class RetryPolicy<R> extends DelayablePolicy<RetryPolicy<R>, R> {
    * <p>Note: Any exceptions that are thrown from within the {@code listener} are ignored.</p>
    */
   public RetryPolicy<R> onAbort(CheckedConsumer<? extends ExecutionCompletedEvent<R>> listener) {
-    abortListener = EventListener.of(Assert.notNull(listener, "listener"));
+    abortListener = EventListener.of(Assert.notNull(listener, LISTENER_STR));
     return this;
   }
 
@@ -235,7 +236,7 @@ public class RetryPolicy<R> extends DelayablePolicy<RetryPolicy<R>, R> {
    * <p>Note: Any exceptions that are thrown from within the {@code listener} are ignored.</p>
    */
   public RetryPolicy<R> onFailedAttempt(CheckedConsumer<? extends ExecutionAttemptedEvent<R>> listener) {
-    failedAttemptListener = EventListener.ofAttempt(Assert.notNull(listener, "listener"));
+    failedAttemptListener = EventListener.ofAttempt(Assert.notNull(listener, LISTENER_STR));
     return this;
   }
 
@@ -245,7 +246,7 @@ public class RetryPolicy<R> extends DelayablePolicy<RetryPolicy<R>, R> {
    * <p>Note: Any exceptions that are thrown from within the {@code listener} are ignored.</p>
    */
   public RetryPolicy<R> onRetriesExceeded(CheckedConsumer<? extends ExecutionCompletedEvent<R>> listener) {
-    retriesExceededListener = EventListener.of(Assert.notNull(listener, "listener"));
+    retriesExceededListener = EventListener.of(Assert.notNull(listener, LISTENER_STR));
     return this;
   }
 
@@ -254,7 +255,7 @@ public class RetryPolicy<R> extends DelayablePolicy<RetryPolicy<R>, R> {
    * <p>Note: Any exceptions that are thrown from within the {@code listener} are ignored.</p>
    */
   public RetryPolicy<R> onRetry(CheckedConsumer<? extends ExecutionAttemptedEvent<R>> listener) {
-    retryListener = EventListener.ofAttempt(Assert.notNull(listener, "listener"));
+    retryListener = EventListener.ofAttempt(Assert.notNull(listener, LISTENER_STR));
     return this;
   }
 

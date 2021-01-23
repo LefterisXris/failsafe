@@ -42,6 +42,7 @@ public class Fallback<R> extends FailurePolicy<Fallback<R>, R> {
    * A fallback that will return a void result if execution fails.
    */
   public static final Fallback<Void> VOID = new Fallback<>();
+  public static final String FALLBACK_STR = "fallback";
 
   private final CheckedFunction<ExecutionAttemptedEvent, R> fallback;
   private final CheckedFunction<ExecutionAttemptedEvent, CompletableFuture<R>> fallbackStage;
@@ -70,7 +71,7 @@ public class Fallback<R> extends FailurePolicy<Fallback<R>, R> {
    * @throws NullPointerException if {@code fallback} is null
    */
   public static <R> Fallback<R> of(CheckedRunnable fallback) {
-    return new Fallback<>(toFn(Assert.notNull(fallback, "fallback")), null, false);
+    return new Fallback<>(toFn(Assert.notNull(fallback, FALLBACK_STR)), null, false);
   }
 
   /**
@@ -80,7 +81,7 @@ public class Fallback<R> extends FailurePolicy<Fallback<R>, R> {
    */
   @SuppressWarnings("unchecked")
   public static <R> Fallback<R> of(CheckedSupplier<? extends R> fallback) {
-    return new Fallback<>(toFn((CheckedSupplier<R>) Assert.notNull(fallback, "fallback")), null, false);
+    return new Fallback<>(toFn((CheckedSupplier<R>) Assert.notNull(fallback, FALLBACK_STR)), null, false);
   }
 
   /**
@@ -91,7 +92,7 @@ public class Fallback<R> extends FailurePolicy<Fallback<R>, R> {
    */
   @SuppressWarnings("unchecked")
   public static <R> Fallback<R> of(CheckedConsumer<ExecutionAttemptedEvent<? extends R>> fallback) {
-    return new Fallback<>(toFn(Assert.notNull((CheckedConsumer) fallback, "fallback")), null, false);
+    return new Fallback<>(toFn(Assert.notNull((CheckedConsumer) fallback, FALLBACK_STR)), null, false);
   }
 
   /**
@@ -102,7 +103,7 @@ public class Fallback<R> extends FailurePolicy<Fallback<R>, R> {
    */
   @SuppressWarnings("unchecked")
   public static <R> Fallback<R> of(CheckedFunction<ExecutionAttemptedEvent<? extends R>, ? extends R> fallback) {
-    return new Fallback<>(Assert.notNull((CheckedFunction) fallback, "fallback"), null, false);
+    return new Fallback<>(Assert.notNull((CheckedFunction) fallback, FALLBACK_STR), null, false);
   }
 
   /**
@@ -114,7 +115,7 @@ public class Fallback<R> extends FailurePolicy<Fallback<R>, R> {
   @SuppressWarnings("unchecked")
   public static <R> Fallback<R> ofException(
     CheckedFunction<ExecutionAttemptedEvent<? extends R>, ? extends Exception> fallback) {
-    Assert.notNull((CheckedFunction) fallback, "fallback");
+    Assert.notNull((CheckedFunction) fallback, FALLBACK_STR);
     return new Fallback<>(e -> {
       throw fallback.apply(e);
     }, null, false);
@@ -134,7 +135,7 @@ public class Fallback<R> extends FailurePolicy<Fallback<R>, R> {
    * @throws NullPointerException if {@code fallback} is null
    */
   public static <R> Fallback<R> ofAsync(CheckedRunnable fallback) {
-    return new Fallback<>(toFn(Assert.notNull(fallback, "fallback")), null, true);
+    return new Fallback<>(toFn(Assert.notNull(fallback, FALLBACK_STR)), null, true);
   }
 
   /**
@@ -144,7 +145,7 @@ public class Fallback<R> extends FailurePolicy<Fallback<R>, R> {
    */
   @SuppressWarnings("unchecked")
   public static <R> Fallback<R> ofAsync(CheckedSupplier<? extends R> fallback) {
-    return new Fallback<>(toFn((CheckedSupplier<R>) Assert.notNull(fallback, "fallback")), null, true);
+    return new Fallback<>(toFn((CheckedSupplier<R>) Assert.notNull(fallback, FALLBACK_STR)), null, true);
   }
 
   /**
@@ -155,7 +156,7 @@ public class Fallback<R> extends FailurePolicy<Fallback<R>, R> {
    */
   @SuppressWarnings("unchecked")
   public static <R> Fallback<R> ofAsync(CheckedConsumer<ExecutionAttemptedEvent<? extends R>> fallback) {
-    return new Fallback<>(toFn(Assert.notNull((CheckedConsumer) fallback, "fallback")), null, true);
+    return new Fallback<>(toFn(Assert.notNull((CheckedConsumer) fallback, FALLBACK_STR)), null, true);
   }
 
   /**
@@ -166,7 +167,7 @@ public class Fallback<R> extends FailurePolicy<Fallback<R>, R> {
    */
   @SuppressWarnings("unchecked")
   public static <R> Fallback<R> ofAsync(CheckedFunction<ExecutionAttemptedEvent<? extends R>, ? extends R> fallback) {
-    return new Fallback<>(Assert.notNull((CheckedFunction) fallback, "fallback"), null, true);
+    return new Fallback<>(Assert.notNull((CheckedFunction) fallback, FALLBACK_STR), null, true);
   }
 
   /**
@@ -175,7 +176,7 @@ public class Fallback<R> extends FailurePolicy<Fallback<R>, R> {
    * @throws NullPointerException if {@code fallback} is null
    */
   public static <R> Fallback<R> ofStage(CheckedSupplier<? extends CompletionStage<R>> fallback) {
-    return new Fallback<>(null, (CheckedFunction) toFn(Assert.notNull(fallback, "fallback")), false);
+    return new Fallback<>(null, (CheckedFunction) toFn(Assert.notNull(fallback, FALLBACK_STR)), false);
   }
 
   /**
@@ -186,7 +187,7 @@ public class Fallback<R> extends FailurePolicy<Fallback<R>, R> {
    */
   public static <R> Fallback<R> ofStage(
     CheckedFunction<ExecutionAttemptedEvent<? extends R>, ? extends CompletionStage<R>> fallback) {
-    return new Fallback<>(null, Assert.notNull((CheckedFunction) fallback, "fallback"), false);
+    return new Fallback<>(null, Assert.notNull((CheckedFunction) fallback, FALLBACK_STR), false);
   }
 
   /**
@@ -195,7 +196,7 @@ public class Fallback<R> extends FailurePolicy<Fallback<R>, R> {
    * @throws NullPointerException if {@code fallback} is null
    */
   public static <R> Fallback<R> ofStageAsync(CheckedSupplier<? extends CompletionStage<R>> fallback) {
-    return new Fallback<>(null, (CheckedFunction) toFn(Assert.notNull(fallback, "fallback")), true);
+    return new Fallback<>(null, (CheckedFunction) toFn(Assert.notNull(fallback, FALLBACK_STR)), true);
   }
 
   /**
@@ -206,7 +207,7 @@ public class Fallback<R> extends FailurePolicy<Fallback<R>, R> {
    */
   public static <R> Fallback<R> ofStageAsync(
     CheckedFunction<ExecutionAttemptedEvent<? extends R>, ? extends CompletionStage<R>> fallback) {
-    return new Fallback<>(null, Assert.notNull((CheckedFunction) fallback, "fallback"), true);
+    return new Fallback<>(null, Assert.notNull((CheckedFunction) fallback, FALLBACK_STR), true);
   }
 
   /**
