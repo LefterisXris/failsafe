@@ -15,11 +15,7 @@
  */
 package net.jodah.failsafe.util.concurrent;
 
-import java.util.concurrent.Delayed;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 
 /**
  * A default ScheduledFuture implementation.

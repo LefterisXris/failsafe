@@ -153,7 +153,7 @@ class TimeoutExecutor extends PolicyExecutor<Timeout> {
           // Fetch timeout result
           try {
             result = executionResult.get();
-          } catch (Exception notPossible) {
+          } catch (Exception ignored) { // notPossible
           }
         }
 

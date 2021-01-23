@@ -20,7 +20,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.net.ConnectException;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
@@ -30,7 +30,7 @@ import static org.testng.Assert.*;
 
 @Test
 public class AsyncExecutionTest {
-  ConnectException e = new ConnectException();
+  final ConnectException e = new ConnectException();
   AsyncExecution exec;
   FailsafeFuture<Object> future;
   Callable<Object> callable;
@@ -249,7 +249,7 @@ public class AsyncExecutionTest {
   }
 
   private static <T> FailsafeExecutor<T> executorFor(RetryPolicy<T> retryPolicy) {
-    return new FailsafeExecutor<>(Arrays.asList(retryPolicy));
+    return new FailsafeExecutor<>(Collections.singletonList(retryPolicy));
   }
 
   private void verifyScheduler(int executions) {

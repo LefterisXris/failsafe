@@ -38,10 +38,10 @@ import static org.testng.Assert.*;
 
 @Test
 public abstract class AbstractFailsafeTest {
-  RetryPolicy<Boolean> retryAlways = new RetryPolicy<Boolean>().withMaxRetries(-1);
-  RetryPolicy<Boolean> retryNever = new RetryPolicy<Boolean>().withMaxRetries(0);
-  RetryPolicy<Boolean> retryTwice = new RetryPolicy<Boolean>().withMaxRetries(2);
-  Service service = mock(Service.class);
+  final RetryPolicy<Boolean> retryAlways = new RetryPolicy<Boolean>().withMaxRetries(-1);
+  final RetryPolicy<Boolean> retryNever = new RetryPolicy<Boolean>().withMaxRetries(0);
+  final RetryPolicy<Boolean> retryTwice = new RetryPolicy<Boolean>().withMaxRetries(2);
+  final Service service = mock(Service.class);
   AtomicInteger counter;
   Waiter waiter;
 

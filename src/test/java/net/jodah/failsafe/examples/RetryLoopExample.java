@@ -27,7 +27,7 @@ import static org.testng.Assert.assertEquals;
 
 @SuppressWarnings("unchecked")
 public class RetryLoopExample {
-  static List<Object> list;
+  static final List<Object> list;
 
   static {
     list = mock(List.class);

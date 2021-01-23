@@ -25,12 +25,12 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AsyncExample {
-  static ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
-  static RetryPolicy<Object> retryPolicy = new RetryPolicy<>().withDelay(Duration.ofMillis(100)).withJitter(.25);
-  static Service service = new Service();
+  static final ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
+  static final RetryPolicy<Object> retryPolicy = new RetryPolicy<>().withDelay(Duration.ofMillis(100)).withJitter(.25);
+  static final Service service = new Service();
 
   public static class Service {
-    AtomicInteger failures = new AtomicInteger();
+    final AtomicInteger failures = new AtomicInteger();
 
     // Fail 3 times then succeed
     CompletableFuture<Boolean> connect() {

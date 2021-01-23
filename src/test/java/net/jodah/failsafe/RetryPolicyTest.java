@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.net.ConnectException;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.testng.Assert.*;
 
@@ -83,7 +83,7 @@ public class RetryPolicyTest {
     assertFalse(policy.isFailure(null, new RuntimeException()));
     assertFalse(policy.isFailure(null, new IllegalStateException()));
 
-    policy = new RetryPolicy<>().handle(Arrays.asList(IllegalArgumentException.class));
+    policy = new RetryPolicy<>().handle(Collections.singletonList(IllegalArgumentException.class));
     assertTrue(policy.isFailure(null, new IllegalArgumentException()));
     assertFalse(policy.isFailure(null, new RuntimeException()));
     assertFalse(policy.isFailure(null, new IllegalStateException()));
@@ -135,7 +135,7 @@ public class RetryPolicyTest {
     assertFalse(policy.isAbortable(null, new RuntimeException()));
     assertFalse(policy.isAbortable(null, new IllegalStateException()));
 
-    policy = new RetryPolicy().abortOn(Arrays.asList(IllegalArgumentException.class));
+    policy = new RetryPolicy().abortOn(Collections.singletonList(IllegalArgumentException.class));
     assertTrue(policy.isAbortable(null, new IllegalArgumentException()));
     assertFalse(policy.isAbortable(null, new RuntimeException()));
     assertFalse(policy.isAbortable(null, new IllegalStateException()));

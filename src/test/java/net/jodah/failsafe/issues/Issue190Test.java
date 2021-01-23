@@ -39,9 +39,7 @@ public class Issue190Test {
     }).onSuccess(e -> {
       successEvents.incrementAndGet();
       waiter.resume();
-    }).getAsyncExecution(execution -> Testing.futureResult(executor, true).whenComplete((result, failure) -> {
-      execution.complete(result);
-    })).get();
+    }).getAsyncExecution(execution -> Testing.futureResult(executor, true).whenComplete((result, failure) -> execution.complete(result))).get();
 
     waiter.await(1000);
     Assert.assertEquals(failureEvents.get(), 0);

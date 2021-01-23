@@ -21,7 +21,8 @@ import net.jodah.failsafe.RetryPolicy;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.concurrent.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 @Test
 public class Issue5Test {

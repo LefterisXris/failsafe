@@ -31,7 +31,7 @@ import static org.testng.Assert.fail;
  */
 @Test
 public class Issue36Test {
-  RetryPolicy<Boolean> retryPolicy = new RetryPolicy<Boolean>().handleResultIf(r -> r == null || !r)
+  final RetryPolicy<Boolean> retryPolicy = new RetryPolicy<Boolean>().handleResultIf(r -> r == null || !r)
       .handle(Exception.class)
       .withMaxRetries(3);
   AtomicInteger calls;

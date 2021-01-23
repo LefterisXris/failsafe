@@ -26,7 +26,11 @@ import java.util.List;
  * @author Jonathan Halterman
  */
 public class Failsafe {
-  /**
+
+   private Failsafe() {
+   }
+
+   /**
    * Creates and returns a new {@link FailsafeExecutor} instance that will handle failures according to the given {@code
    * policies}. The {@code policies} are composed around an execution and will handle execution results in reverse, with
    * the last policy being applied first. For example, consider:

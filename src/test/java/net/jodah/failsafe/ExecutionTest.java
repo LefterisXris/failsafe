@@ -33,7 +33,7 @@ import static org.testng.Assert.*;
  */
 @Test
 public class ExecutionTest {
-  ConnectException e = new ConnectException();
+  final ConnectException e = new ConnectException();
 
   public void testCanRetryForResult() {
     // Given rpRetry for null

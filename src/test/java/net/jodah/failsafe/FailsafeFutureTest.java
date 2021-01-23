@@ -18,13 +18,16 @@ package net.jodah.failsafe;
 import net.jodah.concurrentunit.Waiter;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.*;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import static org.testng.Assert.*;
 
 @Test
 public class FailsafeFutureTest {
-  ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
+  final ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
 
   /**
    * Asserts that retries are stopped and completion handlers are called on cancel.

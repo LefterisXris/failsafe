@@ -58,7 +58,7 @@ public class Testing {
   public static void ignoreExceptions(CheckedRunnable runnable) {
     try {
       runnable.run();
-    } catch (Throwable e) {
+    } catch (Throwable ignored) {
     }
   }
 

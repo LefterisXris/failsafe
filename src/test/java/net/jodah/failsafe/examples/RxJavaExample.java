@@ -42,7 +42,7 @@ public class RxJavaExample {
         if (execution.canRetryOn(failure))
           return Observable.timer(execution.getWaitTime().toNanos(), TimeUnit.NANOSECONDS);
         else
-          return Observable.<Long>error(failure);
+          return Observable.error(failure);
       });
     }).toBlocking().forEach(System.out::println);
   }

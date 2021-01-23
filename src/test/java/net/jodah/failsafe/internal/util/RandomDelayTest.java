@@ -15,9 +15,9 @@
  */
 package net.jodah.failsafe.internal.util;
 
-import static org.testng.Assert.assertEquals;
-
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
 
 @Test
 public class RandomDelayTest {

@@ -57,8 +57,10 @@ final class Functions {
           execution.canInterrupt = false;
           if (execution.interrupted)
             // Clear interrupt flag if interruption was intended
-            Thread.interrupted();
-          else if (throwable instanceof InterruptedException)
+          {
+             if (Thread.interrupted())
+                System.out.println("Thread has been interrupted");
+          } else if (throwable instanceof InterruptedException)
             // Set interrupt flag if interrupt occurred but was not intentional
             Thread.currentThread().interrupt();
         }

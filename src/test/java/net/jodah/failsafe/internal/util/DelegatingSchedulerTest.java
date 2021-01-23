@@ -7,7 +7,10 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.time.Duration;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.testng.Assert.assertFalse;
@@ -15,7 +18,7 @@ import static org.testng.Assert.assertTrue;
 
 @Test
 public class DelegatingSchedulerTest {
-  Scheduler scheduler = DelegatingScheduler.INSTANCE;
+  final Scheduler scheduler = DelegatingScheduler.INSTANCE;
 
   public void shouldSchedule() throws Throwable {
     // Given

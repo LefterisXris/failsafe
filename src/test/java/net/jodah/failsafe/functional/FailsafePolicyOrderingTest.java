@@ -24,12 +24,12 @@ import static org.testng.Assert.assertTrue;
 @Test
 public class FailsafePolicyOrderingTest {
   private Waiter waiter;
-  private CheckedSupplier<Object> failureSupplier = () -> {
+  private final CheckedSupplier<Object> failureSupplier = () -> {
     throw new IllegalStateException();
   };
 
-  Service service = mock(Service.class);
-  CheckedSupplier serviceConnect = service::connect;
+  final Service service = mock(Service.class);
+  final CheckedSupplier serviceConnect = service::connect;
 
   @BeforeMethod
   protected void beforeMethod() {

@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.time.Duration;
-import java.util.Arrays;
+import java.util.Collections;
 
 import static net.jodah.failsafe.Asserts.assertThrows;
 import static org.testng.Assert.*;
@@ -75,7 +75,7 @@ public class CircuitBreakerTest {
     assertFalse(breaker.isFailure(null, new RuntimeException()));
     assertFalse(breaker.isFailure(null, new IllegalStateException()));
 
-    breaker = new CircuitBreaker<>().handle(Arrays.asList(IllegalArgumentException.class));
+    breaker = new CircuitBreaker<>().handle(Collections.singletonList(IllegalArgumentException.class));
     assertTrue(breaker.isFailure(null, new IllegalArgumentException()));
     assertFalse(breaker.isFailure(null, new RuntimeException()));
     assertFalse(breaker.isFailure(null, new IllegalStateException()));

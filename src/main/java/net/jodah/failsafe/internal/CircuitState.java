@@ -16,8 +16,8 @@
 package net.jodah.failsafe.internal;
 
 import net.jodah.failsafe.CircuitBreaker;
-import net.jodah.failsafe.State;
 import net.jodah.failsafe.ExecutionContext;
+import net.jodah.failsafe.State;
 
 import java.time.Duration;
 

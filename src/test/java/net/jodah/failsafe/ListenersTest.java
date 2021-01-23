@@ -34,39 +34,39 @@ import static org.mockito.Mockito.*;
  */
 @Test
 public class ListenersTest {
-  private Service service = mock(Service.class);
-  CheckedSupplier<Boolean> supplier = () -> service.connect();
+  private final Service service = mock(Service.class);
+  final CheckedSupplier<Boolean> supplier = () -> service.connect();
   Waiter waiter;
 
   // RetryPolicy listener counters
   ListenerCounter rpHandle = new ListenerCounter();
-  ListenerCounter rpAbort = new ListenerCounter();
-  ListenerCounter rpFailedAttempt = new ListenerCounter();
-  ListenerCounter rpRetriesExceeded = new ListenerCounter();
-  ListenerCounter rpRetry = new ListenerCounter();
-  ListenerCounter rpSuccess = new ListenerCounter();
-  ListenerCounter rpFailure = new ListenerCounter();
+  final ListenerCounter rpAbort = new ListenerCounter();
+  final ListenerCounter rpFailedAttempt = new ListenerCounter();
+  final ListenerCounter rpRetriesExceeded = new ListenerCounter();
+  final ListenerCounter rpRetry = new ListenerCounter();
+  final ListenerCounter rpSuccess = new ListenerCounter();
+  final ListenerCounter rpFailure = new ListenerCounter();
 
   // CircuitBreaker listener counters
-  ListenerCounter cbOpen = new ListenerCounter();
-  ListenerCounter cbHalfOpen = new ListenerCounter();
-  ListenerCounter cbClose = new ListenerCounter();
-  ListenerCounter cbSuccess = new ListenerCounter();
-  ListenerCounter cbFailure = new ListenerCounter();
+  final ListenerCounter cbOpen = new ListenerCounter();
+  final ListenerCounter cbHalfOpen = new ListenerCounter();
+  final ListenerCounter cbClose = new ListenerCounter();
+  final ListenerCounter cbSuccess = new ListenerCounter();
+  final ListenerCounter cbFailure = new ListenerCounter();
 
   // Fallback listener counters
-  ListenerCounter fbFailedAttempt = new ListenerCounter();
-  ListenerCounter fbSuccess = new ListenerCounter();
-  ListenerCounter fbFailure = new ListenerCounter();
+  final ListenerCounter fbFailedAttempt = new ListenerCounter();
+  final ListenerCounter fbSuccess = new ListenerCounter();
+  final ListenerCounter fbFailure = new ListenerCounter();
 
   // Executor listener counters
-  ListenerCounter complete = new ListenerCounter();
-  ListenerCounter success = new ListenerCounter();
-  ListenerCounter failure = new ListenerCounter();
+  final ListenerCounter complete = new ListenerCounter();
+  final ListenerCounter success = new ListenerCounter();
+  final ListenerCounter failure = new ListenerCounter();
 
   static class ListenerCounter {
     /** Per listener invocations */
-    AtomicInteger invocations = new AtomicInteger();
+    final AtomicInteger invocations = new AtomicInteger();
 
     /** Records an invocation of the {@code listener}. */
     void record() {

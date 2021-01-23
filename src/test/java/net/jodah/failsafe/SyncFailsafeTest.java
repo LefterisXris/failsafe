@@ -39,10 +39,12 @@ import static org.testng.Assert.*;
 @Test
 public class SyncFailsafeTest extends AbstractFailsafeTest {
   // Results from a synchronous Failsafe call
-  private @SuppressWarnings("unchecked") Class<? extends Throwable>[] syncThrowables = new Class[] {
+  private @SuppressWarnings("unchecked")
+  final Class<? extends Throwable>[] syncThrowables = new Class[] {
     ConnectException.class };
   // Results from a get against a future that wraps a synchronous Failsafe call
-  private @SuppressWarnings("unchecked") Class<? extends Throwable>[] futureSyncThrowables = new Class[] {
+  private @SuppressWarnings("unchecked")
+  final Class<? extends Throwable>[] futureSyncThrowables = new Class[] {
     ExecutionException.class, ConnectException.class };
 
   @BeforeMethod
@@ -191,9 +193,7 @@ public class SyncFailsafeTest extends AbstractFailsafeTest {
     assertTrue(breaker.isClosed());
 
     // When
-    assertThrows(() -> Failsafe.with(breaker, timeout).run(() -> {
-      Thread.sleep(20);
-    }), TimeoutExceededException.class);
+    assertThrows(() -> Failsafe.with(breaker, timeout).run(() -> Thread.sleep(20)), TimeoutExceededException.class);
 
     // Then
     assertTrue(breaker.isOpen());
@@ -208,7 +208,7 @@ public class SyncFailsafeTest extends AbstractFailsafeTest {
       try {
         Thread.sleep(100);
         mainThread.interrupt();
-      } catch (Exception e) {
+      } catch (Exception ignored) {
       }
     }).start();
 
@@ -241,7 +241,7 @@ public class SyncFailsafeTest extends AbstractFailsafeTest {
       try {
         Thread.sleep(100);
         mainThread.interrupt();
-      } catch (Exception e) {
+      } catch (Exception ignored) {
       }
     }).start();
 
@@ -373,14 +373,12 @@ public class SyncFailsafeTest extends AbstractFailsafeTest {
       try {
         Thread.sleep(100);
         t.interrupt();
-      } catch (InterruptedException e) {
+      } catch (InterruptedException ignored) {
       }
     }).start();
 
     // Then
-    assertThrows(() -> Failsafe.with(retryNever).run(() -> {
-      Thread.sleep(1000);
-    }), FailsafeException.class, InterruptedException.class);
+    assertThrows(() -> Failsafe.with(retryNever).run(() -> Thread.sleep(1000)), FailsafeException.class, InterruptedException.class);
     t.interrupt();
 
     // Then

@@ -11,7 +11,7 @@ import static org.testng.Assert.assertNull;
 @Test
 @SuppressWarnings("unchecked")
 public class DelayablePolicyTest {
-  DelayFunction delay5Millis = (r, f, c) -> Duration.ofMillis(5);
+  final DelayFunction delay5Millis = (r, f, c) -> Duration.ofMillis(5);
 
   static class FooPolicy<R> extends DelayablePolicy<FooPolicy<R>, R> {
     @Override

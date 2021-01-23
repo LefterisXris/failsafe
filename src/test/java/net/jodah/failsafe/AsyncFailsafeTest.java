@@ -38,10 +38,11 @@ import static org.testng.Assert.*;
 
 @Test
 public class AsyncFailsafeTest extends AbstractFailsafeTest {
-  private ScheduledExecutorService executor = Executors.newScheduledThreadPool(5);
+  private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(5);
 
   // Results from a getAsync against a future that wraps an asynchronous Failsafe call
-  private @SuppressWarnings("unchecked") Class<? extends Throwable>[] futureAsyncThrowables = new Class[] {
+  private @SuppressWarnings("unchecked")
+  final Class<? extends Throwable>[] futureAsyncThrowables = new Class[] {
     ExecutionException.class, ConnectException.class };
 
   @BeforeMethod
@@ -388,9 +389,7 @@ public class AsyncFailsafeTest extends AbstractFailsafeTest {
   }
 
   public void shouldCancelOnRunAsync() throws Throwable {
-    assertCancel(executor -> runAsync(executor, (CheckedRunnable) () -> {
-      Thread.sleep(1000);
-    }), retryAlways);
+    assertCancel(executor -> runAsync(executor, (CheckedRunnable) () -> Thread.sleep(1000)), retryAlways);
   }
 
   public void shouldCancelOnRunAsyncExecution() throws Throwable {

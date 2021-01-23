@@ -94,9 +94,7 @@ public abstract class PolicyExecutor<P extends Policy> {
   protected CompletableFuture<ExecutionResult> postExecuteAsync(ExecutionResult result, Scheduler scheduler,
     FailsafeFuture<Object> future) {
     if (isFailure(result)) {
-      return onFailureAsync(result.withFailure(), scheduler, future).whenComplete((postResult, error) -> {
-        callFailureListener(postResult);
-      });
+      return onFailureAsync(result.withFailure(), scheduler, future).whenComplete((postResult, error) -> callFailureListener(postResult));
     } else {
       result = result.withSuccess();
       onSuccess(result);

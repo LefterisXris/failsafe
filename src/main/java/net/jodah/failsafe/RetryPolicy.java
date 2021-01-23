@@ -25,6 +25,7 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -59,7 +60,7 @@ public class RetryPolicy<R> extends DelayablePolicy<RetryPolicy<R>, R> {
   private double jitterFactor;
   private Duration maxDuration;
   private int maxRetries;
-  private List<BiPredicate<R, Throwable>> abortConditions;
+  private final List<BiPredicate<R, Throwable>> abortConditions;
 
   // Listeners
   private EventListener abortListener;
@@ -133,10 +134,9 @@ public class RetryPolicy<R> extends DelayablePolicy<RetryPolicy<R>, R> {
    *
    * @throws NullPointerException if {@code failure} is null
    */
-  @SuppressWarnings({ "rawtypes" })
   public RetryPolicy<R> abortOn(Class<? extends Throwable> failure) {
     Assert.notNull(failure, "failure");
-    return abortOn(Arrays.asList(failure));
+    return abortOn(Collections.singletonList(failure));
   }
 
   /**

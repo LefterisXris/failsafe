@@ -17,10 +17,7 @@ package net.jodah.failsafe;
 
 import net.jodah.failsafe.internal.util.Assert;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -51,7 +48,7 @@ public abstract class FailurePolicy<S, R> extends PolicyListeners<S, R> implemen
    */
   public S handle(Class<? extends Throwable> failure) {
     Assert.notNull(failure, "failure");
-    return handle(Arrays.asList(failure));
+    return handle(Collections.singletonList(failure));
   }
 
   /**
