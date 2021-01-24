@@ -189,4 +189,16 @@ public class ExecutionResult {
   public int hashCode() {
     return Objects.hash(result, failure);
   }
+
+/**
+ * Returns whether the  {@code  result}  is a success according to the policy. If the {code result} has no result, it is not a failure.
+ */
+public <P> boolean isFailure(P policy) {
+	if (isNonResult())
+		return false;
+	else if (policy instanceof FailurePolicy)
+		return ((FailurePolicy) policy).isFailure(this);
+	else
+		return getFailure() != null;
+}
 }
